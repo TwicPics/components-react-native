@@ -1,17 +1,17 @@
 {
     "author": "TwicPics <hello@twic.pics> (https://www.twicpics.com)",
     "bugs": {
-        "url": "https://github.com/twicpics/components/issues"
+        "url": "https://github.com/TwicPics/components-react-native/issues"
     },
     "description": "A React Native library that brings the power of TwicPics to your ios, android or web applications.",
-    "homepage": "https://github.com/twicpics/components",
+    "homepage": "https://github.com/TwicPics/components-react-native",
     "keywords": [
         "component library",
         "react-native"
     ],
     "license": "MIT",
     "name": "@twicpics/components-react-native",
-    "main": "main.js",
+    "main": "module.js",
     "module": "module.js",
     "types": "types.d.ts",
     "peerDependencies": {
