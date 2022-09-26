@@ -193,8 +193,8 @@ const $310fbde71a4f4c33$var$TwicWrapper = (props)=>{
     const preTransform = (0, $6dbf027893dfcfb9$export$66a84d111eec63b9)(props.preTransform);
     const ratio = (0, $6dbf027893dfcfb9$export$f395e0b220ce706d)(props.ratio);
     const src = (0, $6dbf027893dfcfb9$export$619dbfef2e37ff92)(props.src);
-    const step = (0, $6dbf027893dfcfb9$export$f2bbc8bb71caffd4)(props.step);
     const size = (0, $b089f1ee3230d063$export$887c770fbe334306)(width, height, ratio);
+    const step = (0, $6dbf027893dfcfb9$export$f2bbc8bb71caffd4)(props.step);
     const computedSrc = size.width && (0, $b089f1ee3230d063$export$476b74a8bca09e17)(anchor, focus, mode, preTransform, size, src, step);
     console.log("computedSrc", computedSrc);
     if (computedSrc) return /*#__PURE__*/ (0, $hgUW1$react).createElement((0, $hgUW1$View), {

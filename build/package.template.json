@@ -11,7 +11,7 @@
     ],
     "license": "MIT",
     "name": "@twicpics/components-react-native",
-    "main": "main.js",
+    "main": "module.js",
     "module": "module.js",
     "types": "types.d.ts",
     "peerDependencies": {
