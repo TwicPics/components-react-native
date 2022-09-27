@@ -15,4 +15,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Prototype version for `TwicImg`
 
 [Unreleased]: https://github.com/TwicPics/components/compare/main...dev
-[0.0.1-alpha-0]: https://github.com/TwicPics/components/releases/tag/0.1.0-alpha-0
+[0.0.1-alpha.1]: https://github.com/TwicPics/components/releases/tag/0.1.0-alpha-0
