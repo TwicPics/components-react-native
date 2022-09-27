@@ -4,8 +4,6 @@
 
 This repository contains the builder for [`@twicpics/components-react-native`](https://www.npmjs.com/package/@twicpics/components-react-native).
 
-
-
 ## How to Build
 
 Simply type `yarn && yarn build`. Dependencies are installed automatically.
