@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [0.0.1-alpha.3] - 2021-07-27
+
+### Changed
+
+- Fix version
+
 ## [0.0.1-alpha.2] - 2021-07-27
 
 ### Added
@@ -35,3 +41,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 [unreleased]: https://github.com/TwicPics/components-react-native/compare/main...dev
 [0.0.1-alpha.1]: https://github.com/TwicPics/components-react-native/compare/0.0.1-alpha-0...0.0.1-alpha.1
 [0.0.1-alpha.2]: https://github.com/TwicPics/components-react-native/compare/0.0.1-alpha.1...0.0.1-alpha.2
+[0.0.1-alpha.3]: https://github.com/TwicPics/components-react-native/compare/0.0.1-alpha.2...0.0.1-alpha.3
