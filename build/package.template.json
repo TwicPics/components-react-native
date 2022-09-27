@@ -5,10 +5,7 @@
     },
     "description": "A React Native library that brings the power of TwicPics to your ios, android or web applications.",
     "homepage": "https://github.com/TwicPics/components-react-native",
-    "keywords": [
-        "component library",
-        "react-native"
-    ],
+    "keywords": ["component library", "react-native"],
     "license": "MIT",
     "name": "@twicpics/components-react-native",
     "main": "module.js",
@@ -20,5 +17,5 @@
         "react-native": "*",
         "react-native-web": "*"
     },
-    "version": "0.0.1-alpha.1"
+    "version": "0.0.1-alpha.2"
 }

@@ -1,7 +1,7 @@
 import { config } from './install';
-import { AnchorObject, Mode } from './types';
+import { AnchorObject, Mode, Placeholder } from './types';
 import { regExpFinderFactory, trimRegExpFactory } from './utils';
-import { rValidMode, rValidRatio } from './validate';
+import { rValidMode, rValidPlaceholder, rValidRatio } from './validate';
 
 const isPositiveNumber = (value: number) => !isNaN(value) && value > 0;
 const trimOrUndefined = regExpFinderFactory<string | undefined>(trimRegExpFactory(`.+?`));
@@ -31,6 +31,16 @@ export const parseAnchor = (anchor: string | undefined): AnchorObject => {
 };
 export const parseFocus = trimOrUndefined;
 export const parseMode = regExpFinderFactory<Mode | undefined>(rValidMode);
+export const parsePlaceholder = (placeholder: Placeholder | undefined): Placeholder | undefined => {
+    if (placeholder === `none`) {
+        return undefined;
+    }
+    return placeholder
+        ? rValidPlaceholder.test(placeholder)
+            ? placeholder
+            : `preview`
+        : `preview`;
+};
 export const parsePreTransform = regExpFinderFactory<string | undefined>(
     trimTransformOrUndefined,
     (p) => p && `${p}/`

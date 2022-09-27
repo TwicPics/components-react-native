@@ -1,4 +1,5 @@
 export type Mode = `contain` | `cover`;
+export type Placeholder = `none` | `preview`;
 
 export interface AnchorObject {
     x: string | undefined;
@@ -10,6 +11,7 @@ export interface Attributes {
     anchor?: string;
     focus?: string;
     mode?: Mode;
+    placeholder?: Placeholder;
     preTransform?: string;
     ratio?: number | string;
     step?: number | string;
@@ -20,9 +22,10 @@ export interface Attributes {
 export interface Options {
     debug: boolean;
     domain: string | undefined;
-    path: string;
-    output: string | undefined;
-    step: number;
+    maxDPR?: number;
+    path?: string;
+    output?: string;
+    step?: number;
 }
 
 export interface SizeObject {

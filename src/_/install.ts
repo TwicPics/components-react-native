@@ -4,15 +4,17 @@ import { throwError } from './utils';
 export const config: {
     debug: boolean;
     domain: string | undefined;
-    path: string;
-    output: string | undefined;
+    maxDPR?: number;
+    path?: string;
+    output?: string;
     step: number;
 } = {
     debug: false,
     domain: undefined,
+    maxDPR: 2,
     path: '',
     output: undefined,
-    step: 20
+    step: 10
 };
 
 const rInvalidPath = /\?/;
@@ -23,7 +25,7 @@ export default (options: Options): void => {
     if (!options) {
         throwError(`install options not provided`);
     }
-    const { domain, debug, path, step } = options;
+    const { domain, debug, maxDPR, path, step } = options;
 
     if (!domain || !rValidDomain.test(domain)) {
         throwError(`install domain "${domain}" is invalid`);
@@ -41,6 +43,10 @@ export default (options: Options): void => {
             throwError(`install step "${step}" is invalid`);
         }
         config.step = step;
+    }
+
+    if (maxDPR) {
+        config.maxDPR = maxDPR;
     }
 
     config.debug = debug;

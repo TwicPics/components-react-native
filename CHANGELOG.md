@@ -8,11 +8,30 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [0.1.0-alpha-0] - 2021-07-27
+## [0.0.1-alpha.2] - 2021-07-27
+
+### Added
+
+- Implement LQIP
+
+- Add maxDPR to config options
+
+### Changed
+
+- Console.log outputs only when debug is set to true
+
+## [0.0.1-alpha.1] - 2021-07-27
+
+### Added
+
+- Add some semblance of documentation.
+
+## [0.0.1-alpha.0] - 2021-07-26
 
 ### Added
 
 - Prototype version for `TwicImg`
 
-[Unreleased]: https://github.com/TwicPics/components/compare/main...dev
-[0.0.1-alpha.1]: https://github.com/TwicPics/components/releases/tag/0.1.0-alpha-0
+[unreleased]: https://github.com/TwicPics/components-react-native/compare/main...dev
+[0.0.1-alpha.1]: https://github.com/TwicPics/components-react-native/compare/0.0.1-alpha-0...0.0.1-alpha.1
+[0.0.1-alpha.2]: https://github.com/TwicPics/components-react-native/compare/0.0.1-alpha.1...0.0.1-alpha.2

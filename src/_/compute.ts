@@ -1,8 +1,8 @@
 import { PixelRatio, Platform, StyleSheet } from 'react-native';
 import { config } from './install';
-import { AnchorObject, Mode, SizeObject } from './types';
-const output = undefined;
+import { AnchorObject, Mode, Placeholder, SizeObject } from './types';
 const VERSION = `v1`;
+const PLACEHOLDER_DIM = 1000;
 
 const actualWidth = (w: number, _step: number): number => {
     const step = _step || config.step;
@@ -10,11 +10,12 @@ const actualWidth = (w: number, _step: number): number => {
 };
 
 const actualSize = (size: SizeObject, step: number): SizeObject => {
-    const pixelRatio = Math.min(Math.max(1, PixelRatio.get()), 2);
+    const pixelRatio = Math.min(Math.max(1, PixelRatio.get()), config.maxDPR ? config.maxDPR : 2);
     const _actualWidth = actualWidth(size.width, step) * pixelRatio;
-    console.log('size and pixelRatio', size, pixelRatio);
     let _actualHeight = size.ratio ? _actualWidth * size.ratio : size.height * pixelRatio;
-    console.log('_actual', _actualWidth, _actualHeight);
+    if (config.debug) {
+        console.debug('size and pixelRatio', size, pixelRatio, { _actualWidth, _actualHeight });
+    }
     return {
         width: Math.round(_actualWidth),
         height: Math.round(_actualHeight),
@@ -60,17 +61,39 @@ export const computeSrc = (
     anchor: AnchorObject,
     focus: string | undefined,
     mode: Mode = `cover`,
+    placeholder: Placeholder | undefined,
     preTransform = ``,
     size: SizeObject,
     src: string,
     step: number
 ) => {
-    const { width, height } = actualSize(size, step);
     const [, , path] = rPath.exec(src) || [];
     const noCatchAll = rNoCatchAll.exec(path);
     const noQuery = !rQuery.test(path);
-
     const { debug, domain } = config;
+    let output;
+    let { width, height } = actualSize(size, step);
+    if (placeholder === `preview`) {
+        if (width > 0 && height > 0) {
+            const actualRatio = width / height;
+            if (Platform.OS === `web`) {
+                output = `preview`;
+                width = height = PLACEHOLDER_DIM;
+                if (actualRatio > 1) {
+                    height /= actualRatio;
+                } else {
+                    width *= actualRatio;
+                }
+            } else {
+                const downgradeRate = 900 / (width * height);
+                width = Math.max(1, Math.floor(width * Math.sqrt(downgradeRate)));
+                height = Math.max(1, Math.floor(width / actualRatio));
+            }
+        } else {
+            return undefined;
+        }
+    }
+
     const transform = `${computePreTransform(
         anchor,
         focus,
