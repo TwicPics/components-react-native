@@ -1,7 +1,7 @@
 import { Placeholder } from './types';
 import { trimRegExpFactory } from './utils';
 
-export const validModes = [`contain`, `cover`];
+export const validModes = [`center`, `contain`, `cover`, `repeat`, `stretch`];
 export const rValidMode = trimRegExpFactory(validModes);
 export const validPlaceholders: Array<Placeholder> = [`none`, `preview`];
 export const rValidPlaceholder = trimRegExpFactory(validPlaceholders);

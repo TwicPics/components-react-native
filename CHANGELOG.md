@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [0.0.1-alpha.4] - 2021-07-28
 
+## Added
+
+- Provides all the capabilities of the resizeMode property from the original `Image` component.
+
 ### Changed
 
 - Fix an error in determining the effective size of the display area when the dpr is > 1

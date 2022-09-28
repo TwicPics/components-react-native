@@ -1,4 +1,4 @@
-import { PixelRatio, Platform, StyleSheet } from 'react-native';
+import { PixelRatio, Platform } from 'react-native';
 import { config } from './install';
 import { AnchorObject, Mode, Placeholder, SizeObject } from './types';
 const VERSION = `v1`;
@@ -38,7 +38,7 @@ const computePreTransform = (
     mode: Mode,
     preTransform = ``
 ) => {
-    const actualFocus = mode !== `contain` && (focus || (y ? (x ? `${y}-${x}` : y) : x));
+    const actualFocus = mode === `cover` && (focus || (y ? (x ? `${y}-${x}` : y) : x));
     return `${preTransform || ``}${actualFocus ? `focus=${actualFocus}/` : ``}`;
 };
 
@@ -57,6 +57,13 @@ export const computeSize = (
 const rNoCatchAll = /^v[0-9]+(?:\/|$)|^(rel:)/;
 const rPath = /^(?:image:)?(\/*)(.*)$/;
 const rQuery = /\?/;
+const mappingMode: { [key: string]: string; } = {
+    "center": `contain-max`,
+    "cover": `cover`,
+    "contain": `contain`,
+    "stretch": `resize`,
+    "repeat": `contain-max`
+};
 export const computeSrc = (
     anchor: AnchorObject,
     focus: string | undefined,
@@ -71,6 +78,7 @@ export const computeSrc = (
     const noCatchAll = rNoCatchAll.exec(path);
     const noQuery = !rQuery.test(path);
     const { debug, domain } = config;
+    const actualMode = mappingMode[mode];
     let output;
     let { width, height } = actualSize(size, step);
     if (placeholder === `preview`) {
@@ -99,7 +107,7 @@ export const computeSrc = (
         focus,
         mode,
         preTransform
-    )}${mode}=${width}x${height}`;
+    )}${actualMode}=${width}x${height}`;
     const actualOutput = output ? `/output=${output}` : ``;
     const actualDebug = debug && Platform.OS === 'web' ? `/debug` : ``;
 

@@ -1,4 +1,4 @@
-export type Mode = `contain` | `cover`;
+export type Mode = `center` | `contain` | `cover` | `repeat` | `stretch`;
 export type Placeholder = `none` | `preview`;
 
 export interface AnchorObject {
