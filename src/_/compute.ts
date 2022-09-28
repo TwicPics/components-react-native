@@ -11,7 +11,7 @@ const actualWidth = (w: number, _step: number): number => {
 
 const actualSize = (size: SizeObject, step: number): SizeObject => {
     const pixelRatio = Math.min(Math.max(1, PixelRatio.get()), config.maxDPR ? config.maxDPR : 2);
-    const _actualWidth = actualWidth(size.width, step) * pixelRatio;
+    const _actualWidth = actualWidth(size.width * pixelRatio, step);
     let _actualHeight = size.ratio ? _actualWidth * size.ratio : size.height * pixelRatio;
     if (config.debug) {
         console.debug('size and pixelRatio', size, pixelRatio, { _actualWidth, _actualHeight });
@@ -104,12 +104,10 @@ export const computeSrc = (
     const actualDebug = debug && Platform.OS === 'web' ? `/debug` : ``;
 
     return noCatchAll
-        ? `${domain}/${VERSION}${actualDebug}/${transform}${actualOutput}/${
-              noCatchAll[1] ? `` : `image:`
-          }${path}`
-        : `${domain}/${path}${
-              noQuery ? `?` : `&`
-          }twic=${VERSION}${actualDebug}/${transform}${actualOutput}`;
+        ? `${domain}/${VERSION}${actualDebug}/${transform}${actualOutput}/${noCatchAll[1] ? `` : `image:`
+        }${path}`
+        : `${domain}/${path}${noQuery ? `?` : `&`
+        }twic=${VERSION}${actualDebug}/${transform}${actualOutput}`;
 };
 
 export const computeStyle = (value: any, ratio: number | undefined) => {
@@ -126,13 +124,4 @@ export const computeStyle = (value: any, ratio: number | undefined) => {
         return tmp;
     }
     return value;
-};
-
-export const computeWrapperStyle = (size: SizeObject, styles: any) => {
-    return StyleSheet.flatten([
-        styles.wrapper,
-        {
-            height: size.height
-        }
-    ]);
 };

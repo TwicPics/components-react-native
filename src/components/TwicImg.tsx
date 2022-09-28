@@ -16,7 +16,6 @@ import {
     computeSize,
     computeSrc,
     computeStyle,
-    computeWrapperStyle
 } from '../_/compute';
 import { config } from '../_/install';
 import { Attributes, WrapperState } from '../_/types';
@@ -43,9 +42,9 @@ const TwicWrapper = React.memo((props: WrapperAttributes) => {
     let computedPlaceholderSrc =
         placeholder === `preview` &&
         computeSrc(anchor, focus, mode, placeholder, preTransform, size, src, step);
-    const imageTransition = new Animated.Value(placeholder ? 1 : 0);
+    const placeHolderTransition = new Animated.Value(placeholder ? 1 : 0);
     const onImage = () => {
-        Animated.timing(imageTransition, {
+        Animated.timing(placeHolderTransition, {
             toValue: 0,
             duration: 200,
             useNativeDriver: true
@@ -57,7 +56,7 @@ const TwicWrapper = React.memo((props: WrapperAttributes) => {
             console.debug('Computed src ', computedSrc, computedPlaceholderSrc);
         }
         return (
-            <View style={computeWrapperStyle(size, styles)}>
+            <View style={styles.wrapper}>
                 <Image
                     accessibilityLabel={computeAlt(alt, src)}
                     source={{ uri: computedSrc }}
@@ -71,7 +70,7 @@ const TwicWrapper = React.memo((props: WrapperAttributes) => {
                         blurRadius={blur()}
                         source={{ uri: computedPlaceholderSrc }}
                         resizeMode={mode}
-                        style={[styles.placeholdeImg, { opacity: imageTransition }]}
+                        style={[styles.placeholdeImg, { opacity: placeHolderTransition }]}
                     />
                 )}
                 {config.debug && (
@@ -101,6 +100,7 @@ export default class TwicImg extends Component<Attributes, WrapperState> {
         const { props } = this;
         const ratio = parseRatio(props.ratio);
         const style = computeStyle(props.style, ratio);
+        console.log("render", style);
         return (
             <View
                 style={StyleSheet.flatten([styles.layout, style])}
@@ -147,6 +147,7 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         overflow: `hidden`,
-        width: '100%'
+        width: '100%',
+        height: '100%'
     }
 });
