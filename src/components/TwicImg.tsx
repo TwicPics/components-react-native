@@ -100,7 +100,6 @@ export default class TwicImg extends Component<Attributes, WrapperState> {
         const { props } = this;
         const ratio = parseRatio(props.ratio);
         const style = computeStyle(props.style, ratio);
-        console.log("render", style);
         return (
             <View
                 style={StyleSheet.flatten([styles.layout, style])}

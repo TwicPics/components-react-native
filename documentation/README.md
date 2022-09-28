@@ -164,5 +164,5 @@ Fell free to submit an [issue](https://github.com/TwicPics/components-react-nati
 
 [license-image]: https://img.shields.io/npm/l/@twicpics/components-react-native.svg?style=flat-square
 [license-url]: https://raw.githubusercontent.com/twicpics/components-react-native/master/LICENSE
-[npm-image]: https://img.shields.io/badge/npm-v0.0.1--alpha.3-orange.svg?style=flat-square
-[npm-url]: https://www.npmjs.com/package/@twicpics/components-react-native/v/0.0.1-alpha.3
+[npm-image]: https://img.shields.io/badge/npm-v0.0.1--alpha.5-orange.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/@twicpics/components-react-native/v/0.0.1-alpha.5
