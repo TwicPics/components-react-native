@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Animated, Image, Platform, StyleSheet, Text, View } from 'react-native';
+import { Animated, Image, LayoutChangeEvent, Platform, StyleSheet, Text, View } from 'react-native';
 import {
     parseAlt,
     parseAnchor,
@@ -37,8 +37,7 @@ const TwicWrapper = React.memo((props: WrapperAttributes) => {
     const src = parseSrc(props.src);
     const size = computeSize(width, height, ratio);
     const step = parseStep(props.step);
-    const computedSrc =
-        size.width && computeSrc(anchor, focus, mode, undefined, preTransform, size, src, step);
+    const computedSrc = computeSrc(anchor, focus, mode, undefined, preTransform, size, src, step);
     let computedPlaceholderSrc =
         placeholder === `preview` &&
         computeSrc(anchor, focus, mode, placeholder, preTransform, size, src, step);
@@ -51,40 +50,37 @@ const TwicWrapper = React.memo((props: WrapperAttributes) => {
         }).start();
     };
     const blur = () => (Platform.OS === `web` ? 0 : 5);
-    if (computedSrc) {
-        if (config.debug) {
-            console.debug('Computed src ', computedSrc, computedPlaceholderSrc);
-        }
-        return (
-            <View style={styles.wrapper}>
-                <Image
-                    accessibilityLabel={computeAlt(alt, src)}
-                    source={{ uri: computedSrc }}
-                    resizeMode={mode}
-                    style={styles.img}
-                    onLoad={onImage}
-                />
-                {computedPlaceholderSrc && (
-                    <Animated.Image
-                        accessibilityLabel={computeAlt(alt, src)}
-                        blurRadius={blur()}
-                        source={{ uri: computedPlaceholderSrc }}
-                        resizeMode={mode}
-                        style={[styles.placeholdeImg, { opacity: placeHolderTransition }]}
-                    />
-                )}
-                {config.debug && (
-                    <View style={styles.debug}>
-                        <Text>
-                            Debug {width} {height} - {computedSrc} - {JSON.stringify(props)}
-                        </Text>
-                    </View>
-                )}
-            </View>
-        );
-    } else {
-        return null;
+   
+    if (config.debug) {
+        console.debug('Computed src ', computedSrc, computedPlaceholderSrc);
     }
+    return (
+        <View style={styles.wrapper}>
+            <Image
+                accessibilityLabel={computeAlt(alt, src)}
+                source={{ uri: computedSrc }}
+                resizeMode={mode}
+                style={styles.img}
+                onLoad={onImage}
+            />
+            {computedPlaceholderSrc && (
+                <Animated.Image
+                    accessibilityLabel={computeAlt(alt, src)}
+                    blurRadius={blur()}
+                    source={{ uri: computedPlaceholderSrc }}
+                    resizeMode={mode}
+                    style={[styles.placeholdeImg, { opacity: placeHolderTransition }]}
+                />
+            )}
+            {config.debug && (
+                <View style={styles.debug}>
+                    <Text>
+                        Debug {width} {height} - {computedSrc} - {JSON.stringify(props)}
+                    </Text>
+                </View>
+            )}
+        </View>
+    );
 });
 
 export default class TwicImg extends Component<Attributes, WrapperState> {
@@ -95,7 +91,6 @@ export default class TwicImg extends Component<Attributes, WrapperState> {
             height: 0
         };
     }
-
     render() {
         const { props } = this;
         const ratio = parseRatio(props.ratio);
@@ -103,18 +98,27 @@ export default class TwicImg extends Component<Attributes, WrapperState> {
         return (
             <View
                 style={StyleSheet.flatten([styles.layout, style])}
-                onLayout={(event) => {
-                    let { x, y, width, height } = event.nativeEvent.layout;
-                    if (config.debug) {
-                        console.debug('onLayout', x, y, width, height);
+                onLayout= {
+                    (event: LayoutChangeEvent) =>
+                    {
+                        const { x, y, width, height } = event.nativeEvent.layout;
+                        if (config.debug) {
+                            console.debug('onLayout', x, y, width, height);
+                        }
+                        this.setState(
+                            {
+                                width: width,
+                                height: height
+                            }
+                        );
                     }
-                    this.setState({
-                        width: width,
-                        height: height
-                    });
-                }}
+                }
             >
-                <TwicWrapper {...props} width={this.state.width} height={this.state.height} />
+                {
+                    (this.state.height && this.state.width) ?
+                    <TwicWrapper {...props} width={this.state.width} height={this.state.height} />
+                    : undefined 
+                }
             </View>
         );
     }

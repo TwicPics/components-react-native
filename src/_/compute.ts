@@ -82,23 +82,19 @@ export const computeSrc = (
     let output;
     let { width, height } = actualSize(size, step);
     if (placeholder === `preview`) {
-        if (width > 0 && height > 0) {
-            const actualRatio = width / height;
-            if (Platform.OS === `web`) {
-                output = `preview`;
-                width = height = PLACEHOLDER_DIM;
-                if (actualRatio > 1) {
-                    height /= actualRatio;
-                } else {
-                    width *= actualRatio;
-                }
+        const actualRatio = width / height;
+        if (Platform.OS === `web`) {
+            output = `preview`;
+            width = height = PLACEHOLDER_DIM;
+            if (actualRatio > 1) {
+                height /= actualRatio;
             } else {
-                const downgradeRate = 900 / (width * height);
-                width = Math.max(1, Math.floor(width * Math.sqrt(downgradeRate)));
-                height = Math.max(1, Math.floor(width / actualRatio));
+                width *= actualRatio;
             }
         } else {
-            return undefined;
+            const downgradeRate = 900 / (width * height);
+            width = Math.max(1, Math.floor(width * Math.sqrt(downgradeRate)));
+            height = Math.max(1, Math.floor(width / actualRatio));
         }
     }
 

@@ -8,9 +8,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Changed 
+
+- Wrapper simplification
+
 ## [0.0.1-alpha.5] - 2021-07-28
 
-## Added
+### Added
 
 - Provides all the capabilities of the resizeMode property from the original `Image` component.
 
