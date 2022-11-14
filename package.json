@@ -7,7 +7,6 @@
     "name": "@twicpics/components-react-native",
     "version": "0.0.1-alpha.5",
     "license": "MIT",
-    "main": "dist/main.js",
     "module": "dist/module.js",
     "react-native": "src/index.ts",
     "source": "src/index.ts",
