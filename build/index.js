@@ -11,6 +11,7 @@ console.log(`build components... `);
 execSync(`npx parcel build`);
 console.log(`components generated... `);
 
+
 console.log(`generating package.json...`);
 const packageJSON = await getJsonFromPath(`${__dirname}/package.template.json`);
 await writeJson(`${__dirname}/../dist/package.json`, packageJSON);

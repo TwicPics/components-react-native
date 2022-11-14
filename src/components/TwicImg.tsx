@@ -101,10 +101,7 @@ export default class TwicImg extends Component<Attributes, WrapperState> {
                 onLayout= {
                     (event: LayoutChangeEvent) =>
                     {
-                        const { x, y, width, height } = event.nativeEvent.layout;
-                        if (config.debug) {
-                            console.debug('onLayout', x, y, width, height);
-                        }
+                        const { width, height } = event.nativeEvent.layout;
                         this.setState(
                             {
                                 width: width,
@@ -142,7 +139,7 @@ const styles = StyleSheet.create({
         top: 0,
         bottom: 0,
         left: 0,
-        right: 0
+        right: 0,
     },
     layout: {
         overflow: `hidden`,
